@@ -409,7 +409,7 @@ botClient
   .catch((err) => console.error("❌ Dashboard bot login failed:", err));
 
 const allowedOrigins = [
-  "http://localhost:5173",
+  "https://kyro-dashboard-eight.vercel.app",
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
@@ -3173,7 +3173,7 @@ req.session.save((err) => {
     return res.status(500).send("Failed to save session.");
   }
 
-  res.redirect(process.env.CLIENT_URL || "http://localhost:5173/");
+  res.redirect(process.env.CLIENT_URL || "https://kyro-dashboard-eight.vercel.app/");
 });
   } catch (error) {
     console.error(

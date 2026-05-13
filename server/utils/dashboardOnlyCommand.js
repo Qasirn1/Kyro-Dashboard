@@ -7,7 +7,7 @@ const {
 
 function buildDashboardUrl(guildId, page = "dashboard") {
   const baseUrl =
-    process.env.KYRO_DASHBOARD_URL || "http://localhost:5173";
+    process.env.KYRO_DASHBOARD_URL || "https://kyro-dashboard-eight.vercel.app";
 
   return `${baseUrl}/#/${page}?guild=${guildId}`;
 }

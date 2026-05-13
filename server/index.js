@@ -3175,7 +3175,8 @@ req.session.save((err) => {
     return res.status(500).send("Failed to save session.");
   }
 
-  res.redirect(process.env.CLIENT_URL || "https://kyro-dashboard-eight.vercel.app/");
+  const clientUrl = process.env.CLIENT_URL || "https://kyro-dashboard-eight.vercel.app";
+res.redirect(`${clientUrl}/?token=${encodeURIComponent(accessToken)}`);
 });
   } catch (error) {
     console.error(
@@ -3187,7 +3188,9 @@ req.session.save((err) => {
 });
 
 app.get("/api/discord/user", async (req, res) => {
-const token = req.session?.accessToken;
+const token =
+  req.session?.accessToken ||
+  req.headers.authorization?.replace("Bearer ", "");
 
 if (!token) {
   return res.status(401).json({ error: "Not authenticated" });
@@ -3208,7 +3211,9 @@ if (!token) {
 });
 
 app.get("/api/discord/guilds", async (req, res) => {
-  const token = req.session?.accessToken;
+  const token =
+  req.session?.accessToken ||
+  req.headers.authorization?.replace("Bearer ", "");
 
 if (!token) {
   return res.status(401).json({ error: "Not authenticated" });

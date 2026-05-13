@@ -227,47 +227,53 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  if (activePage !== "premium") return;
 
-  setTimeout(() => {
-    contentScrollRef.current?.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
+  const params = new URLSearchParams(window.location.search);
+  const tokenFromUrl = params.get("token");
 
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
-  }, 80);
-}, [activePage]);
+  if (tokenFromUrl) {
+    localStorage.setItem("kyro_auth_token", tokenFromUrl);
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
 
- useEffect(() => {
   const fetchDiscordData = async () => {
+    const authToken = localStorage.getItem("kyro_auth_token");
     try {
       setAuthLoading(true);
 
-      const userRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/user", {
-  withCredentials: true,
-});
+      const userRes = await axios.get(
+  "https://kyro-dashboard-production.up.railway.app/api/discord/user",
+  {
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }
+);
       const userData = userRes.data;
       setUser(userData);
       setToken("session");
 
-     const guildsRes = await axios.get(
+const guildsRes = await axios.get(
   "https://kyro-dashboard-production.up.railway.app/api/discord/guilds",
   {
     withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
   }
 );
       const guildsData = guildsRes.data;
       const safeGuilds = Array.isArray(guildsData) ? guildsData : [];
       setGuilds(safeGuilds);
 
-      const botGuildsRes = await axios.get(
+ const botGuildsRes = await axios.get(
   "https://kyro-dashboard-production.up.railway.app/api/discord/bot-guilds",
   {
     withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
   }
 );
       const botGuildsData = botGuildsRes.data;

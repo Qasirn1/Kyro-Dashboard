@@ -1,0 +1,53 @@
+{
+  "1496159360294850681": {
+    "security": {
+      "suspiciousAccount": {
+        "enabled": false,
+        "accountAgeDays": 3,
+        "checkDefaultAvatar": true,
+        "action": "alert",
+        "alertChannelId": "",
+        "mentionRole": false,
+        "roleId": "",
+        "quarantineRoleId": "",
+        "banDeleteMessageSeconds": 0
+      },
+      "antiRaid": {
+        "enabled": false,
+        "joinThreshold": 5,
+        "timeWindowSeconds": 10,
+        "alertChannelId": "",
+        "mentionRole": false,
+        "roleId": "",
+        "action": "alert",
+        "quarantineRoleId": ""
+      },
+      "antiNuke": {
+        "enabled": true,
+        "punishment": "alert",
+        "timeWindowSeconds": 10,
+        "alertChannelId": "1501388611415707658",
+        "mentionRole": true,
+        "roleId": "1496160218692714537",
+        "quarantineRoleId": "",
+        "whitelist": [],
+        "modules": {
+          "channelDelete": true,
+          "channelCreate": true,
+          "roleDelete": true,
+          "roleCreate": true,
+          "ban": true,
+          "kick": true
+        },
+        "limits": {
+          "channelDelete": 3,
+          "channelCreate": 3,
+          "roleDelete": 3,
+          "roleCreate": 3,
+          "ban": 3,
+          "kick": 3
+        }
+      }
+    }
+  }
+}

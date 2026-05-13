@@ -423,6 +423,8 @@ app.use(
 app.use(express.json({ limit: "25mb" }));
 app.use(express.json());
 
+app.set("trust proxy", 1);
+
 app.use(
   session({
     name: "kyro.sid",
@@ -431,16 +433,16 @@ app.use(
     saveUninitialized: false,
     rolling: true,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
+      mongoUrl: process.env.MONGO_URI || process.env.MONGODB_URI,
       collectionName: "dashboard_sessions",
-      ttl: 60 * 60 * 24 * 7, // 7 days
+      ttl: 60 * 60 * 24 * 7,
       autoRemove: "native",
     }),
     cookie: {
-      secure: false,
+      secure: true,
       httpOnly: true,
-      sameSite: "lax",
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })
 );

@@ -247,17 +247,17 @@ useEffect(() => {
     try {
       setAuthLoading(true);
 
-      const userRes = await axios.get("http://localhost:3001/api/discord/user");
+      const userRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/user");
       const userData = userRes.data;
       setUser(userData);
       setToken("session");
 
-      const guildsRes = await axios.get("http://localhost:3001/api/discord/guilds");
+      const guildsRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/guilds");
       const guildsData = guildsRes.data;
       const safeGuilds = Array.isArray(guildsData) ? guildsData : [];
       setGuilds(safeGuilds);
 
-      const botGuildsRes = await axios.get("http://localhost:3001/api/discord/bot-guilds");
+      const botGuildsRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/bot-guilds");
       const botGuildsData = botGuildsRes.data;
       const installedIds = botGuildsData.success ? botGuildsData.guildIds || [] : [];
       setBotGuildIds(installedIds);
@@ -1365,7 +1365,7 @@ if (authLoading) {
               <button
                 style={authButton}
                 onClick={() => {
-                  window.location.href = "http://localhost:3001/auth/discord";
+                  window.location.href = "https://kyro-dashboard-production.up.railway.app/auth/discord";
                 }}
               >
                 Login
@@ -1765,7 +1765,7 @@ function DashboardPage({
       boxShadow: "0 10px 30px rgba(59,130,246,0.4)",
     }}
     onClick={() => {
-      window.location.href = "http://localhost:3001/auth/discord";
+      window.location.href = "https://kyro-dashboard-production.up.railway.app/auth/discord";
     }}
   >
     Login with Discord

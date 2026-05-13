@@ -247,17 +247,29 @@ useEffect(() => {
     try {
       setAuthLoading(true);
 
-      const userRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/user");
+      const userRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/user", {
+  withCredentials: true,
+});
       const userData = userRes.data;
       setUser(userData);
       setToken("session");
 
-      const guildsRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/guilds");
+     const guildsRes = await axios.get(
+  "https://kyro-dashboard-production.up.railway.app/api/discord/guilds",
+  {
+    withCredentials: true,
+  }
+);
       const guildsData = guildsRes.data;
       const safeGuilds = Array.isArray(guildsData) ? guildsData : [];
       setGuilds(safeGuilds);
 
-      const botGuildsRes = await axios.get("https://kyro-dashboard-production.up.railway.app/api/discord/bot-guilds");
+      const botGuildsRes = await axios.get(
+  "https://kyro-dashboard-production.up.railway.app/api/discord/bot-guilds",
+  {
+    withCredentials: true,
+  }
+);
       const botGuildsData = botGuildsRes.data;
       const installedIds = botGuildsData.success ? botGuildsData.guildIds || [] : [];
       setBotGuildIds(installedIds);
